@@ -39,7 +39,7 @@ def dec_text():
         label=tkinter.Label(text="Please enter true key")
         label.place(x=50, y=690)
 
-
+'''
 def check_text():
     t=baslik_cevap.get()
     y=my_text_cevap.get("1.0",END)
@@ -50,7 +50,7 @@ def check_text():
         messagebox.showinfo(title="ERROR",message="Please enter text")
     elif k == "" or k == " ":
         messagebox.showinfo(title="ERROR", message="Please enter key")
-
+'''
 image=(Image.open("lastly.png"))
 resize_image = image.resize((150,150),Image.ANTIALIAS)
 new_image = ImageTk.PhotoImage(resize_image)
