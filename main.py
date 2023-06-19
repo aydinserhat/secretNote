@@ -1,5 +1,6 @@
 import tkinter
 from tkinter import *
+from tkinter import messagebox
 from PIL import ImageTk, Image
 from cryptography.fernet import Fernet
 ekran = tkinter.Tk()
@@ -11,14 +12,19 @@ fernet=Fernet(key)
 encMessage = ""
 
 def enc_text():
-    check_text()
-    z = my_text_cevap.get("1.0", END)
-    global my_key
-    my_key= key_sonuc.get()
-    global encMessage
-    encMessage = fernet.encrypt(z.encode())
-    with open('deneme.txt', 'w') as f:
-        f.write(str(encMessage))
+    t = baslik_cevap.get()
+    y = my_text_cevap.get("1.0", END)
+    k = key_sonuc.get()
+    if len(t) == 0 or len(y) <= 1 or len(k) == 0:
+        messagebox.showinfo(title="ERROR", message="Please enter text")
+    else:
+        z = my_text_cevap.get("1.0", END)
+        global my_key
+        my_key= key_sonuc.get()
+        global encMessage
+        encMessage = fernet.encrypt(z.encode())
+        with open('deneme.txt', 'w') as f:
+            f.write(str(encMessage))
 
 def dec_text():
     global encMessage
@@ -37,18 +43,13 @@ def dec_text():
 def check_text():
     t=baslik_cevap.get()
     y=my_text_cevap.get("1.0",END)
-    print(y)
     k=key_sonuc.get()
     if t== "" or t == " ":
-        label=tkinter.Label(text="Enter title!")
-        label.place(x=50,y=690)
-
-    elif y== "" or y == " ":
-        label=tkinter.Label(text="Enter text!")
-        label.place(x=50,y=690)
+        messagebox.showinfo(title="ERROR", message="Please enter title")
+    elif len(y) <= 1:
+        messagebox.showinfo(title="ERROR",message="Please enter text")
     elif k == "" or k == " ":
-        label=tkinter.Label(text="Enter key!!")
-        label.place(x=50,y=690)
+        messagebox.showinfo(title="ERROR", message="Please enter key")
 
 image=(Image.open("lastly.png"))
 resize_image = image.resize((150,150),Image.ANTIALIAS)
